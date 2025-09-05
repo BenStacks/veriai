@@ -35,6 +35,8 @@ const VerifyPage = () => {
   const [verificationResult, setVerificationResult] = useState<VerificationResult | null>(null);
   const [verificationHistory, setVerificationHistory] = useState<VerificationResult[]>([]);
   const [loading, setLoading] = useState(false);
+  const [isDragOver, setIsDragOver] = useState(false);
+  const [uploadedFile, setUploadedFile] = useState<{ name: string; size: number } | null>(null);
 
   useEffect(() => {
     if (isConnected && address) {
@@ -80,13 +82,80 @@ const VerifyPage = () => {
     }
   };
 
+  const handleFileUpload = (file: File) => {
+    if (file.type.startsWith('text/') || file.name.endsWith('.txt') || file.name.endsWith('.md') || file.name.endsWith('.json')) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const text = e.target?.result as string;
+        setContent(text);
+        setUploadedFile({
+          name: file.name,
+          size: file.size
+        });
+      };
+      reader.onerror = () => {
+        alert('Error reading file. Please try again.');
+      };
+      reader.readAsText(file);
+    } else {
+      alert('Please upload a text file (.txt, .md, .json)');
+    }
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragOver(false);
+    const files = Array.from(e.dataTransfer.files);
+    if (files.length > 0) {
+      handleFileUpload(files[0]);
+    }
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragOver(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragOver(false);
+  };
+
+  const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files && files.length > 0) {
+      handleFileUpload(files[0]);
+    }
+  };
+
+  const clearUploadedFile = () => {
+    setUploadedFile(null);
+    setContent('');
+    // Reset file input
+    const fileInput = document.getElementById('file-upload') as HTMLInputElement;
+    if (fileInput) {
+      fileInput.value = '';
+    }
+  };
+
+  const handleContentChange = (value: string) => {
+    setContent(value);
+    // If user manually edits content, clear uploaded file reference
+    if (uploadedFile && value !== content) {
+      setUploadedFile(null);
+    }
+  };
+
   const handleVerify = async () => {
     if (!content.trim() || !isConnected || !address) return;
 
     setIsVerifying(true);
     try {
-      // Create content hash
-      const contentHash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(content.trim()));
+      // Use the exact content as entered (trimmed) for both hash and verification
+      const trimmedContent = content.trim();
+      
+      // Create content hash - using the same content we'll send
+      const contentHash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(trimmedContent));
       const outputHash = Array.from(new Uint8Array(contentHash))
         .map(b => b.toString(16).padStart(2, '0'))
         .join('');
@@ -97,11 +166,20 @@ const VerifyPage = () => {
       // Request wallet signature
       const signature = await signMessageAsync({ message });
 
+      console.log('Manual verification request:', {
+        outputHash,
+        message,
+        signature,
+        userAddress: address,
+        contentLength: trimmedContent.length,
+        contentPreview: trimmedContent.substring(0, 100)
+      });
+
       const response = await verificationApi.requestVerification({
         prompt: 'Verify this content',
         model: 'gemini-1.5-flash',
         userAddress: address,
-        output: content.trim(),
+        output: trimmedContent,
         outputHash,
         signature,
         message
@@ -193,7 +271,7 @@ const VerifyPage = () => {
                       id="content"
                       placeholder="Paste the AI-generated content you want to verify..."
                       value={content}
-                      onChange={(e) => setContent(e.target.value)}
+                      onChange={(e) => handleContentChange(e.target.value)}
                       className="min-h-48 mt-2"
                       maxLength={5000}
                     />
@@ -203,17 +281,58 @@ const VerifyPage = () => {
                     </div>
                   </div>
 
+                  {/* File Upload Preview */}
+                  {uploadedFile && (
+                    <div className="border border-green-200 bg-green-50 rounded-lg p-4">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-2">
+                          <FileText className="h-5 w-5 text-green-600" />
+                          <div>
+                            <p className="text-sm font-medium text-green-800">{uploadedFile.name}</p>
+                            <p className="text-xs text-green-600">{(uploadedFile.size / 1024).toFixed(1)} KB</p>
+                          </div>
+                        </div>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={clearUploadedFile}
+                          className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                        >
+                          Remove
+                        </Button>
+                      </div>
+                    </div>
+                  )}
+
                   {/* Upload Option */}
                   <div className="border-t pt-6">
                     <Label className="text-base font-medium">Or Upload File</Label>
-                    <div className="mt-2 border-2 border-dashed border-border rounded-lg p-8 text-center hover:border-primary/50 transition-colors cursor-pointer">
-                      <Upload className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
+                    <div 
+                      className={`mt-2 border-2 border-dashed rounded-lg p-8 text-center transition-colors cursor-pointer relative ${
+                        isDragOver 
+                          ? 'border-primary bg-primary/5' 
+                          : 'border-border hover:border-primary/50'
+                      }`}
+                      onDrop={handleDrop}
+                      onDragOver={handleDragOver}
+                      onDragLeave={handleDragLeave}
+                      onClick={() => document.getElementById('file-upload')?.click()}
+                    >
+                      <Upload className={`h-8 w-8 mx-auto mb-2 ${isDragOver ? 'text-primary' : 'text-muted-foreground'}`} />
                       <p className="text-sm text-muted-foreground">
                         Drop a text file here or click to browse
                       </p>
                       <p className="text-xs text-muted-foreground mt-1">
-                        Supports .txt, .md, .doc files
+                        Supports .txt, .md, .json files
                       </p>
+                      <input
+                        id="file-upload"
+                        type="file"
+                        accept=".txt,.md,.json,text/*"
+                        onChange={handleFileInputChange}
+                        className="absolute inset-0 opacity-0 cursor-pointer"
+                        aria-label="Upload file"
+                      />
                     </div>
                   </div>
 
