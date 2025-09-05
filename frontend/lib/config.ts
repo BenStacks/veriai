@@ -1,12 +1,12 @@
 export const APP_CONFIG = {
   name: 'VeriAI',
   description: 'On-Chain Verification for AI-Generated Content',
-  url: 'https://veriai.app',
+  url: 'https://veriai.vercel.app/',
   version: '1.0.0',
   
   // API Configuration
   api: {
-    baseUrl: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001',
+    baseUrl: process.env.NEXT_PUBLIC_API_URL || 'https://veriai-backend-hv6zjp4xgq-uc.a.run.app',
     timeout: 30000,
   },
   
