@@ -4,6 +4,16 @@
 
 VeriAI is a revolutionary platform that provides cryptographic proof and NFT certificates for AI-generated content using Flare Data Connector (FDC) oracles and Solana blockchain integration. Built for the era of AI transparency, VeriAI ensures trust, authenticity, and verifiability in AI-generated content.
 
+## 🚀 Live Demo
+
+**Try VeriAI now:**
+
+- 🌐 **Frontend**: [https://veriai.vercel.app](https://veriai.vercel.app)
+- 🔧 **Backend API**: [https://veriai-backend-hv6zjp4xgq-uc.a.run.app](https://veriai-backend-hv6zjp4xgq-uc.a.run.app)
+- 📚 **API Documentation**: [https://veriai-backend-hv6zjp4xgq-uc.a.run.app/api-docs](https://veriai-backend-hv6zjp4xgq-uc.a.run.app/api-docs)
+
+_Experience decentralized AI content verification with real blockchain certificates!_
+
 ## 🌟 Overview
 
 VeriAI solves the critical problem of AI content verification by creating immutable, blockchain-backed certificates for AI-generated content. When you generate content through VeriAI, multiple independent oracles verify the AI response and create an NFT certificate that proves:
@@ -27,14 +37,14 @@ graph TB
     G --> H[Smart Contract]
     H --> I[NFT Certificate]
     I --> J[User's Wallet]
-    
+
     subgraph "AI Models"
         D1[OpenAI GPT-4]
         D2[Google Gemini]
         D3[Groq Llama]
         D4[DeepSeek]
     end
-    
+
     subgraph "Blockchain Networks"
         H1[Flare Network]
         H2[Solana Network]
@@ -44,16 +54,19 @@ graph TB
 ## 🚀 Key Features
 
 ### 🔐 **Decentralized Verification**
+
 - Multiple independent oracles verify AI responses
 - Consensus-based validation ensures authenticity
 - No single point of failure or trust
 
 ### 🏆 **NFT Certificates**
+
 - Unique NFT for each verified AI generation
 - Immutable proof stored on blockchain
 - Collectible portfolio of AI interactions
 
 ### 🤖 **Multi-AI Support**
+
 - OpenAI GPT-4 and GPT-3.5
 - Google Gemini Pro
 - Groq Llama models
@@ -61,17 +74,20 @@ graph TB
 - Extensible to more AI providers
 
 ### 💰 **Dynamic Pricing**
+
 - SOL/USD price oracle integration
 - Fixed $1 USD equivalent pricing
 - Automatic fee calculation in real-time
 
 ### 📊 **Comprehensive Analytics**
+
 - User verification history
 - Success/failure rate tracking
 - AI model performance metrics
 - Portfolio management
 
 ### ⚡ **Real-time Updates**
+
 - WebSocket integration for live status
 - Instant verification notifications
 - Progress tracking for long requests
@@ -79,6 +95,7 @@ graph TB
 ## 🛠️ Tech Stack
 
 ### **Frontend**
+
 - **Framework**: Next.js 15 with React 19
 - **Styling**: Tailwind CSS + Radix UI
 - **Wallet Integration**: Web3Auth (Multi-chain)
@@ -87,6 +104,7 @@ graph TB
 - **Blockchain**: Wagmi + Viem (Ethereum), Solana Web3.js
 
 ### **Backend**
+
 - **Runtime**: Node.js with TypeScript
 - **Framework**: Express.js
 - **Database**: MongoDB with Mongoose
@@ -96,12 +114,14 @@ graph TB
 - **Security**: Helmet, CORS, Rate limiting
 
 ### **Smart Contracts**
+
 - **Solidity**: For Ethereum-compatible chains (Flare)
 - **Solang**: For Solana deployment
 - **Oracles**: Flare Data Connector (FDC)
 - **Standards**: ERC-721 for NFTs
 
 ### **Infrastructure**
+
 - **Cloud**: Google Cloud Run
 - **CI/CD**: Cloud Build
 - **Secrets**: Google Secret Manager
@@ -153,7 +173,7 @@ veriai/
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - Docker (for deployment)
 - MongoDB instance
 - Google Cloud account (for deployment)
@@ -230,7 +250,13 @@ nano .env.local
 **Frontend Environment Variables:**
 
 ```env
+# For development (local backend)
 NEXT_PUBLIC_API_URL=http://localhost:3001
+
+# For production (deployed backend)
+NEXT_PUBLIC_API_URL=https://veriai-backend-hv6zjp4xgq-uc.a.run.app
+
+# Web3Auth & Blockchain Configuration
 NEXT_PUBLIC_WEB3AUTH_CLIENT_ID=your_web3auth_client_id
 NEXT_PUBLIC_FLARE_RPC_URL=https://flare-api.flare.network/ext/C/rpc
 NEXT_PUBLIC_SOLANA_RPC_URL=https://api.mainnet-beta.solana.com
@@ -242,6 +268,14 @@ npm run dev
 ```
 
 ### 4. Access the Application
+
+**Live Production:**
+
+- 🌐 **Frontend**: [https://veriai.vercel.app](https://veriai.vercel.app)
+- 🔧 **Backend API**: [https://veriai-backend-hv6zjp4xgq-uc.a.run.app](https://veriai-backend-hv6zjp4xgq-uc.a.run.app)
+- 📚 **API Documentation**: [https://veriai-backend-hv6zjp4xgq-uc.a.run.app/api-docs](https://veriai-backend-hv6zjp4xgq-uc.a.run.app/api-docs)
+
+**Local Development:**
 
 - **Frontend**: http://localhost:3000
 - **Backend API**: http://localhost:3001
@@ -305,6 +339,7 @@ chmod +x deploy.sh
 ```
 
 The deployment script automatically:
+
 - ✅ Builds Docker image
 - ✅ Uploads secrets to Secret Manager
 - ✅ Deploys to Cloud Run
@@ -346,6 +381,7 @@ npx hardhat run scripts/deploy.js --network flare
 ### Core Endpoints
 
 #### POST `/api/verification/request`
+
 Request AI content verification
 
 ```json
@@ -357,6 +393,7 @@ Request AI content verification
 ```
 
 #### GET `/api/verification/:requestId`
+
 Get verification status
 
 ```json
@@ -369,46 +406,53 @@ Get verification status
 ```
 
 #### GET `/api/user/:address/verifications`
+
 Get user's verification history
 
 #### POST `/api/ai/generate`
+
 Direct AI generation with verification
 
 ### WebSocket Events
 
 ```typescript
 // Subscribe to verification updates
-socket.emit('subscribe-verification', requestId);
+socket.emit("subscribe-verification", requestId);
 
 // Listen for status updates
-socket.on('verification-status', (data) => {
-  console.log('Status:', data.status);
+socket.on("verification-status", (data) => {
+  console.log("Status:", data.status);
 });
 ```
 
 ## 🎯 Use Cases
 
 ### 👩‍🎓 **Academic Integrity**
+
 - Students prove AI assistance was used legitimately
 - Teachers verify authenticity of AI-generated content
 - Academic institutions maintain transparent AI policies
 
 ### 📝 **Content Creation**
+
 - Writers establish copyright for AI-assisted content
 - Publishers verify content authenticity
 - Content creators build portfolios of AI collaborations
 
 ### 💼 **Business & Legal**
+
 - Companies prove AI-generated reports are unmodified
 - Legal professionals use certified AI analysis
 - Compliance teams maintain audit trails
 
 ### 🎨 **Creative Industries**
+
 - Artists showcase AI collaboration process
 - Musicians prove authentic AI composition
 - Designers demonstrate creative AI workflows
 
 ### 🔬 **Research & Development**
+
 - Researchers document AI experiment results
 - Scientists verify AI-assisted analysis
 - Data analysts prove methodology transparency
@@ -416,22 +460,26 @@ socket.on('verification-status', (data) => {
 ## 🔐 Security Features
 
 ### **Cryptographic Verification**
+
 - SHA-256 hashing for content integrity
 - Elliptic curve signatures for authentication
 - Merkle tree proofs for batch verification
 
 ### **Oracle Security**
+
 - Multiple independent oracle consensus
 - Byzantine fault tolerance
 - Stake-based oracle reputation
 
 ### **Smart Contract Security**
+
 - Reentrancy protection
 - Access control mechanisms
 - Emergency pause functionality
 - Upgrade proxy patterns
 
 ### **API Security**
+
 - JWT authentication
 - Rate limiting per user
 - Request validation
@@ -441,30 +489,35 @@ socket.on('verification-status', (data) => {
 ## 📈 Roadmap
 
 ### **Phase 1: Core Platform** ✅
+
 - [x] Basic verification system
 - [x] NFT certificate generation
 - [x] Multi-AI integration
 - [x] Web3 wallet connection
 
 ### **Phase 2: Oracle Integration** ✅
+
 - [x] Flare Data Connector integration
 - [x] Multiple oracle consensus
 - [x] Dynamic pricing with SOL/USD oracle
 - [x] Solana blockchain support
 
 ### **Phase 3: Enhanced Features** 🚧
+
 - [ ] Advanced analytics dashboard
 - [ ] NFT marketplace integration
 - [ ] Batch verification processing
 - [ ] API key management
 
 ### **Phase 4: Enterprise** 📋
+
 - [ ] Enterprise API access
 - [ ] Custom verification workflows
 - [ ] White-label solutions
 - [ ] SLA guarantees
 
 ### **Phase 5: Ecosystem** 🔮
+
 - [ ] Third-party integrations
 - [ ] Plugin architecture
 - [ ] Community governance
@@ -496,16 +549,23 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🆘 Support
 
 ### Documentation
-- [How VeriAI Works](howitworks.md) - Detailed explanation
-- [API Documentation](https://api.veriai.com/docs) - Interactive API docs
-- [Smart Contract Docs](contracts/README.md) - Contract documentation
+
+- 🚀 [**Live Demo Guide**](DEMO.md) - Complete demo walkthrough and testing scenarios
+- 🔐 [**Web3Auth Integration**](WEB3AUTH_INTEGRATION.md) - Detailed integration documentation
+- 🛠️ [**Setup & Testing Guide**](SETUP_TESTING.md) - Development setup and testing instructions
+- 📝 [**Project Pitch**](PROJECT_PITCH.md) - Problem, solution, and impact overview
+- 📖 [**How VeriAI Works**](howitworks.md) - Technical deep dive and architecture
+- 📚 [**API Documentation**](https://veriai-backend-hv6zjp4xgq-uc.a.run.app/api-docs) - Interactive API docs
+- 📜 [**Smart Contract Docs**](contracts/README.md) - Contract documentation
 
 ### Community
+
 - [Discord](https://discord.gg/veriai) - Community chat
 - [Twitter](https://twitter.com/veriai) - Updates and news
 - [GitHub Issues](https://github.com/BenStacks/veriai/issues) - Bug reports
 
 ### Enterprise
+
 - [Contact Sales](mailto:sales@veriai.com) - Enterprise solutions
 - [Support Portal](https://support.veriai.com) - Technical support
 - [Status Page](https://status.veriai.com) - Service status
@@ -523,7 +583,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Built with ❤️ by the VeriAI Team**
 
-*Making AI content trustworthy, one verification at a time.*
+_Making AI content trustworthy, one verification at a time._
 
 [![Deploy to Cloud Run](https://deploy.cloud.run/button.svg)](https://deploy.cloud.run)
-[![Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/BenStacks/veriai)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/BenStacks/veriai&project-name=veriai&repository-name=veriai)
