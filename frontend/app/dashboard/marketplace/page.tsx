@@ -19,7 +19,8 @@ import {
   List,
   Flame,
   Crown,
-  Zap
+  Zap,
+  X
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { userApi } from '@/lib/api/client';
@@ -394,13 +395,36 @@ const MarketplacePage = () => {
 
       {/* Solana Pay Modal */}
       {showSolanaPayModal && selectedNFT && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+        <div 
+          className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+          onClick={(e) => {
+            // Close modal when clicking backdrop
+            if (e.target === e.currentTarget) {
+              setShowSolanaPayModal(false);
+              setSelectedNFT(null);
+            }
+          }}
+        >
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
-            className="w-full max-w-md"
+            className="w-full max-w-md relative"
+            onClick={(e) => e.stopPropagation()} // Prevent modal from closing when clicking content
           >
+            {/* Close Button */}
+            <Button
+              variant="ghost"
+              size="sm"
+              className="absolute -top-12 right-0 text-white hover:text-white hover:bg-white/20 z-10"
+              onClick={() => {
+                setShowSolanaPayModal(false);
+                setSelectedNFT(null);
+              }}
+            >
+              <X className="h-4 w-4" />
+            </Button>
+            
             <VeriAISolanaPayWidget
               mode="purchase"
               nft={{
