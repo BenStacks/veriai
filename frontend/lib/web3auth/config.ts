@@ -15,7 +15,7 @@ export const web3AuthContextConfig: Web3AuthContextConfig = {
     web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_DEVNET, // Use devnet for development
     uiConfig: {
       appName: "VeriAI",
-      mode: "auto", 
+      mode: "dark", 
       logoLight: "/veriai-logo.png", 
       logoDark: "/veriai-logo.png",  
       defaultLanguage: "en",
