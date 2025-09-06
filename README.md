@@ -114,10 +114,10 @@ graph TB
 
 ### **Smart Contracts**
 
-- **Solidity**: For Ethereum-compatible chains (Flare)
+- **Rust/Anchor**: For Solana smart contracts
 - **Solang**: For Solana deployment
-- **Oracles**: Flare Data Connector (FDC)
-- **Standards**: ERC-721 for NFTs
+- **Oracles**: Solana Oracle Network
+- **Standards**: SPL Token for NFTs
 
 ### **Infrastructure**
 
@@ -215,7 +215,7 @@ DEEPSEEK_API_KEY=your_deepseek_key
 # Blockchain
 PRIVATE_KEY=your_private_key
 VERI_AI_CONTRACT_ADDRESS=contract_address
-FDC_ORACLE_ADDRESS=oracle_address
+SOLANA_ORACLE_ADDRESS=oracle_address
 
 # Security
 JWT_SECRET=your_jwt_secret
@@ -257,7 +257,6 @@ NEXT_PUBLIC_API_URL=https://veriai-backend-hv6zjp4xgq-uc.a.run.app
 
 # Web3Auth & Blockchain Configuration
 NEXT_PUBLIC_WEB3AUTH_CLIENT_ID=your_web3auth_client_id
-NEXT_PUBLIC_FLARE_RPC_URL=https://flare-api.flare.network/ext/C/rpc
 NEXT_PUBLIC_SOLANA_RPC_URL=https://api.mainnet-beta.solana.com
 ```
 
@@ -368,8 +367,8 @@ npm install
 # Compile contracts
 npx hardhat compile
 
-# Deploy to Flare Network
-npx hardhat run scripts/deploy.js --network flare
+# Deploy to Solana Network
+anchor deploy
 
 # Deploy to Solana (using Solang)
 ./deploy-with-solang.sh
@@ -496,7 +495,7 @@ socket.on("verification-status", (data) => {
 
 ### **Phase 2: Oracle Integration** ✅
 
-- [x] Flare Data Connector integration
+- [x] Solana Oracle integration
 - [x] Multiple oracle consensus
 - [x] Dynamic pricing with SOL/USD oracle
 - [x] Solana blockchain support
@@ -571,8 +570,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- [Flare Network](https://flare.network/) - Oracle infrastructure
-- [Solana](https://solana.com/) - High-performance blockchain
+- [Solana](https://solana.com/) - High-performance blockchain and oracle infrastructure
 - [OpenAI](https://openai.com/) - AI model access
 - [Web3Auth](https://web3auth.io/) - Wallet infrastructure
 - [Vercel](https://vercel.com/) - Frontend hosting

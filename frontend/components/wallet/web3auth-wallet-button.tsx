@@ -153,11 +153,6 @@ export function Web3AuthWalletButton() {
         
         <DropdownMenuSeparator />
         
-        {/* Debug info - temporary */}
-        <DropdownMenuItem disabled className="text-xs text-gray-500">
-          Debug: ETH connected: {wallet.ethereum?.isConnected ? 'YES' : 'NO'}, SOL connected: {wallet.solana?.isConnected ? 'YES' : 'NO'}
-        </DropdownMenuItem>
-        
         {/* Ethereum Chain Info */}
         {wallet.ethereum?.isConnected && (
           <>

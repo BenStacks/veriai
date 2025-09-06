@@ -19,7 +19,7 @@ VeriAI addresses these challenges through a three-tier verification system:
 
 ### 1. **Blockchain-Backed Request Registration**
 
-- All verification requests are immutably recorded on the Flare blockchain
+- All verification requests are immutably recorded on the Solana blockchain
 - Each request receives a unique cryptographic identifier
 - Timestamp and user attribution are permanently preserved
 
@@ -124,7 +124,7 @@ Each VeriAI certificate contains the following immutable metadata:
     "verificationTime": "2025-09-06T10:30:00Z"
   },
   "blockchain": {
-    "network": "Flare",
+    "network": "Solana",
     "blockNumber": 12345678,
     "transactionHash": "0x8e3c..."
   }
