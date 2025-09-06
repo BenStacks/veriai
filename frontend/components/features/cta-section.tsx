@@ -73,21 +73,21 @@ export function CTASection() {
                   <p className="text-sm text-muted-foreground">
                     Powered by{' '}
                     <a
-                      href="https://flare.network"
+                      href="https://solana.com"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="font-medium text-primary hover:underline"
                     >
-                      Flare Network
+                      Solana Network
                     </a>
                     {' '}• Secured by{' '}
                     <a
-                      href="https://dev.flare.network/fdc"
+                      href="https://docs.solana.com"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="font-medium text-primary hover:underline"
                     >
-                      Data Connector
+                      Solana Oracles
                     </a>
                     {' '}• Open Source
                   </p>

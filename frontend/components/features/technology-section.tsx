@@ -8,16 +8,16 @@ import { ExternalLink } from 'lucide-react';
 
 const technologies = [
   {
-    name: 'Flare Network',
-    description: 'Layer 1 blockchain with native data connectivity',
-    url: 'https://flare.network',
+    name: 'Solana Network',
+    description: 'High-performance blockchain with native oracle capabilities',
+    url: 'https://solana.com',
     type: 'Blockchain',
     color: 'bg-red-500/10 text-red-700 dark:text-red-300',
   },
   {
-    name: 'Data Connector',
-    description: 'Decentralized oracle network for external data',
-    url: 'https://dev.flare.network/fdc',
+    name: 'Solana Oracles',
+    description: 'Decentralized oracle network for external data verification',
+    url: 'https://docs.solana.com',
     type: 'Oracle',
     color: 'bg-blue-500/10 text-blue-700 dark:text-blue-300',
   },
@@ -36,9 +36,9 @@ const technologies = [
     color: 'bg-purple-500/10 text-purple-700 dark:text-purple-300',
   },
   {
-    name: 'ERC-721',
-    description: 'Non-fungible token standard for verification certificates',
-    url: 'https://eips.ethereum.org/EIPS/eip-721',
+    name: 'SPL Token',
+    description: 'Solana Program Library standard for verification certificates',
+    url: 'https://spl.solana.com',
     type: 'Standard',
     color: 'bg-yellow-500/10 text-yellow-700 dark:text-yellow-300',
   },

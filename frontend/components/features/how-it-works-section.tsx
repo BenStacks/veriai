@@ -17,8 +17,8 @@ const steps = [
   {
     number: '02',
     icon: Shield,
-    title: 'FDC Verification',
-    description: 'Flare Data Connector validates output through decentralized consensus',
+    title: 'Solana Verification',
+    description: 'Solana oracles validate output through decentralized consensus on high-performance blockchain',
     color: 'from-purple-500 to-pink-500',
   },
   {

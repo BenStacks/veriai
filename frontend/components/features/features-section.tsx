@@ -17,8 +17,8 @@ const features = [
   },
   {
     icon: Zap,
-    title: 'Flare Data Connector',
-    description: 'Leverages Flare\'s native FDC for decentralized consensus and tamper-proof verification',
+    title: 'Solana Oracles',
+    description: 'Leverages Solana\'s high-performance oracle network for decentralized consensus and tamper-proof verification',
     color: 'text-chart-4',
     gradient: 'from-chart-4 to-chart-4/70',
   },
@@ -75,7 +75,7 @@ export function FeaturesSection() {
             </h2>
             <p className="text-lg text-muted-foreground sm:text-xl max-w-3xl mx-auto">
               The first and only solution for cryptographically verifying AI content
-              using decentralized blockchain technology on Flare Network.
+              using decentralized blockchain technology on Solana Network.
             </p>
           </motion.div>
 

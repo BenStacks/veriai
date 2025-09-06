@@ -36,7 +36,7 @@ export function HeroSection() {
                 className="inline-flex items-center rounded-full bg-primary/10 border border-primary/20 px-6 py-3 text-sm font-medium"
               >
                 <Zap className="mr-2 h-4 w-4 text-primary" />
-                <span className="text-primary">Powered by Flare Data Connector</span>
+                <span className="text-primary">Powered by Solana Oracles</span>
               </motion.div>
 
               {/* Main Heading */}
@@ -60,8 +60,8 @@ export function HeroSection() {
                   transition={{ duration: 0.8, delay: 0.4 }}
                   className="text-xl text-muted-foreground leading-relaxed max-w-xl"
                 >
-                  Get cryptographic proof of AI-generated content authenticity using Flare's 
-                  decentralized Data Connector. Transform AI outputs into immutable verification certificates.
+                  Get cryptographic proof of AI-generated content authenticity using Solana's 
+                  decentralized oracle network. Transform AI outputs into immutable verification certificates.
                 </motion.p>
               </div>
 

@@ -2,7 +2,7 @@
 
 **Decentralized AI Content Verification with Blockchain-Backed Certificates**
 
-VeriAI is a revolutionary platform that provides cryptographic proof and NFT certificates for AI-generated content using Flare Data Connector (FDC) oracles and Solana blockchain integration. Built for the era of AI transparency, VeriAI ensures trust, authenticity, and verifiability in AI-generated content.
+VeriAI is a revolutionary platform that provides cryptographic proof and NFT certificates for AI-generated content using Solana oracles and blockchain integration. Built for the era of AI transparency, VeriAI ensures trust, authenticity, and verifiability in AI-generated content.
 
 ## 🚀 Live Demo
 
@@ -31,7 +31,7 @@ graph TB
     A[User Request] --> B[VeriAI Frontend]
     B --> C[VeriAI Backend API]
     C --> D[AI Services]
-    C --> E[Flare Data Connector]
+    C --> E[Solana Oracles]
     E --> F[Multiple Oracles]
     F --> G[Consensus Verification]
     G --> H[Smart Contract]
@@ -45,9 +45,8 @@ graph TB
         D4[DeepSeek]
     end
 
-    subgraph "Blockchain Networks"
-        H1[Flare Network]
-        H2[Solana Network]
+    subgraph "Blockchain Network"
+        H1[Solana Network]
     end
 ```
 
@@ -101,7 +100,7 @@ graph TB
 - **Wallet Integration**: Web3Auth (Multi-chain)
 - **State Management**: TanStack Query
 - **Real-time**: Socket.io Client
-- **Blockchain**: Wagmi + Viem (Ethereum), Solana Web3.js
+- **Blockchain**: Solana Web3.js
 
 ### **Backend**
 
