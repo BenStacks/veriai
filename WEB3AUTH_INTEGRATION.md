@@ -2,7 +2,7 @@
 
 ## Overview
 
-VeriAI leverages **Web3Auth** to provide seamless, secure, and user-friendly wallet authentication across multiple blockchain networks. This integration enables users to connect to both Ethereum-compatible chains (like Flare) and Solana without complex wallet setup.
+VeriAI leverages **Web3Auth** to provide seamless, secure, and user-friendly wallet authentication for the Solana blockchain. This integration enables users to connect without complex wallet setup while maintaining full access to Solana's high-performance network.
 
 ## Integration Architecture
 
@@ -24,12 +24,10 @@ graph TB
     I --> K
     J --> K
 
-    K --> L[Multi-Chain Wallet]
-    L --> M[Ethereum Provider]
-    L --> N[Solana Provider]
+    K --> L[Solana Wallet]
+    L --> M[Solana Provider]
 
-    M --> O[Flare Network]
-    N --> P[Solana Network]
+    M --> N[Solana Network]
 ```
 
 ## Implementation Details
@@ -47,13 +45,13 @@ const clientId = process.env.NEXT_PUBLIC_WEB3AUTH_CLIENT_ID;
 export const web3AuthConfig = {
   clientId,
   chainConfig: {
-    chainNamespace: "eip155", // For Ethereum-compatible chains
-    chainId: "0x72", // Flare Network
-    rpcTarget: "https://flare-api.flare.network/ext/C/rpc",
-    displayName: "Flare Network",
-    blockExplorer: "https://flare-explorer.flare.network/",
-    ticker: "FLR",
-    tickerName: "Flare",
+    chainNamespace: "solana", // For Solana network
+    chainId: "0x1", // Solana Mainnet
+    rpcTarget: "https://api.mainnet-beta.solana.com",
+    displayName: "Solana Network",
+    blockExplorer: "https://explorer.solana.com/",
+    ticker: "SOL",
+    tickerName: "Solana",
   },
   uiConfig: {
     theme: "dark",
@@ -65,37 +63,26 @@ export const web3AuthConfig = {
 
 ### 2. **Multi-Chain Provider Setup**
 
+````typescript
+### 2. **Solana Provider Setup**
+
 ```typescript
-// hooks/use-web3auth-multichain.ts
-export const useWeb3AuthMultichain = () => {
+// hooks/use-web3auth-solana.ts
+export const useWeb3AuthSolana = () => {
   const [web3auth, setWeb3auth] = useState<Web3AuthModal | null>(null);
-  const [ethereumProvider, setEthereumProvider] = useState(null);
   const [solanaProvider, setSolanaProvider] = useState(null);
 
-  const initializeProviders = async () => {
-    // Ethereum Provider (for Flare Network)
-    const ethereumProvider = new EthereumPrivateKeyProvider({
-      config: { chainConfig: flareChainConfig },
-    });
-
+  const initializeProvider = async () => {
     // Solana Provider
     const solanaProvider = new SolanaPrivateKeyProvider({
-      config: { chainConfig: solanaChainConfig },
+      config: { chainConfig: solanaChainConfig }
     });
 
-    await ethereumProvider.setupProvider(web3auth.provider);
     await solanaProvider.setupProvider(web3auth.provider);
-
-    setEthereumProvider(ethereumProvider);
     setSolanaProvider(solanaProvider);
   };
 
   return {
-    ethereum: {
-      provider: ethereumProvider,
-      address: ethereumAddress,
-      balance: ethereumBalance,
-    },
     solana: {
       provider: solanaProvider,
       address: solanaAddress,
@@ -103,7 +90,7 @@ export const useWeb3AuthMultichain = () => {
     },
   };
 };
-```
+````
 
 ### 3. **Authentication Flow**
 
@@ -118,18 +105,13 @@ export const VeriAIWeb3AuthProvider = ({ children }) => {
       const web3authProvider = await web3auth.connect();
       const userInfo = await web3auth.getUserInfo();
 
-      // Get addresses for both chains
-      const ethAddress = await getEthereumAddress(web3authProvider);
+      // Get Solana address
       const solAddress = await getSolanaAddress(web3authProvider);
 
       setUser({
         ...userInfo,
-        addresses: {
-          ethereum: ethAddress,
-          solana: solAddress,
-        },
+        address: solAddress,
       });
-
       setIsConnected(true);
     } catch (error) {
       console.error("Connection failed:", error);

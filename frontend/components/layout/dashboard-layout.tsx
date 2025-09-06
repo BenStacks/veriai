@@ -61,7 +61,7 @@ const mockNotifications: Notification[] = [
     id: '3',
     type: 'marketplace',
     title: 'NFT Sold',
-    message: 'Your verification NFT VER_045 has been sold for 0.5 FLR',
+    message: 'Your verification NFT VER_045 has been sold for 0.5 SOL',
     timestamp: '3 hours ago',
     read: true
   }

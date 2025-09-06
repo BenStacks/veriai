@@ -156,11 +156,11 @@ const AnalyticsPage = () => {
                   <Zap className="h-5 w-5" />
                   Network Status
                 </CardTitle>
-                <CardDescription>Flare network performance</CardDescription>
+                <CardDescription>Solana network performance</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm font-medium">FDC Status</span>
+                  <span className="text-sm font-medium">Network Status</span>
                   <Badge className="bg-chart-3/10 text-chart-3 border-chart-3/20">
                     <CheckCircle className="h-3 w-3 mr-1" />
                     Online

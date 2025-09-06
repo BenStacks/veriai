@@ -26,6 +26,8 @@ import { motion } from 'framer-motion';
 import { userApi } from '@/lib/api/client';
 import { useVeriAIAuth } from '@/hooks/useVeriAIAuth';
 import { VeriAISolanaPayWidget } from '@/components/solana-pay/veriAISolanaPayWidget';
+import { SuccessModal } from '@/components/ui/success-modal';
+import { ErrorModal } from '@/components/ui/error-modal';
 
 interface MarketplaceNFT {
   id: string;
@@ -52,6 +54,10 @@ const MarketplacePage = () => {
   const [loading, setLoading] = useState(false);
   const [selectedNFT, setSelectedNFT] = useState<MarketplaceNFT | null>(null);
   const [showSolanaPayModal, setShowSolanaPayModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [purchaseData, setPurchaseData] = useState<any>(null);
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const marketplaceStats = [
     { title: 'Items Listed', value: '2,847', change: '+156', icon: Store, color: 'text-primary' },
@@ -154,7 +160,8 @@ const MarketplacePage = () => {
   // Handle NFT purchase
   const handleBuyNFT = (nft: MarketplaceNFT) => {
     if (!isConnected) {
-      alert('Please connect your wallet first');
+      setErrorMessage('Please connect your wallet to purchase NFTs');
+      setShowErrorModal(true);
       return;
     }
     setSelectedNFT(nft);
@@ -164,9 +171,9 @@ const MarketplacePage = () => {
   const handlePaymentComplete = (paymentData: any) => {
     console.log('Payment completed:', paymentData);
     setShowSolanaPayModal(false);
-    setSelectedNFT(null);
-    // In production, update NFT ownership, remove from marketplace, etc.
-    alert(`Successfully purchased ${paymentData.nft?.name}!`);
+    setPurchaseData(paymentData);
+    setShowSuccessModal(true);
+    // Note: selectedNFT is kept for the success modal, will be cleared when modal closes
   };
 
   const handlePaymentError = (error: string) => {
@@ -440,6 +447,72 @@ const MarketplacePage = () => {
           </motion.div>
         </div>
       )}
+
+      {/* Success Modal */}
+      <SuccessModal
+        isOpen={showSuccessModal}
+        onClose={() => {
+          setShowSuccessModal(false);
+          setSelectedNFT(null);
+          setPurchaseData(null);
+        }}
+        title="🎉 Purchase Successful!"
+        message="Your NFT has been successfully purchased and transferred to your wallet."
+        type="purchase"
+        nft={selectedNFT ? {
+          name: selectedNFT.name,
+          price: selectedNFT.price,
+          currency: selectedNFT.currency,
+          id: selectedNFT.tokenId,
+          transactionHash: purchaseData?.transactionHash
+        } : undefined}
+        actionButtons={{
+          primary: {
+            label: "View in Collection",
+            onClick: () => {
+              setShowSuccessModal(false);
+              setSelectedNFT(null);
+              setPurchaseData(null);
+              // Navigate to collection page
+              window.location.href = '/dashboard/collection';
+            },
+            icon: <Eye className="h-4 w-4 mr-2" />
+          },
+          secondary: {
+            label: "Continue Shopping",
+            onClick: () => {
+              setShowSuccessModal(false);
+              setSelectedNFT(null);
+              setPurchaseData(null);
+            },
+            icon: <ShoppingCart className="h-4 w-4 mr-2" />
+          }
+        }}
+      />
+
+      {/* Error Modal */}
+      <ErrorModal
+        isOpen={showErrorModal}
+        onClose={() => setShowErrorModal(false)}
+        title="Wallet Connection Required"
+        message={errorMessage}
+        type="warning"
+        actionButtons={{
+          primary: {
+            label: "Connect Wallet",
+            onClick: () => {
+              setShowErrorModal(false);
+              // Trigger wallet connection - you may need to call your wallet connection method here
+            },
+            icon: <ShoppingCart className="h-4 w-4 mr-2" />
+          },
+          secondary: {
+            label: "Cancel",
+            onClick: () => setShowErrorModal(false),
+            icon: <X className="h-4 w-4 mr-2" />
+          }
+        }}
+      />
     </div>
   );
 };

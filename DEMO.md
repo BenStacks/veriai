@@ -124,7 +124,7 @@ Expected: Technical verification, documentation NFT with high utility value
 
 - **Frontend**: Next.js 15 with React 19
 - **Backend**: Node.js with Express, deployed on Google Cloud Run
-- **Blockchain**: Flare Network (for oracles) + Solana (for NFTs)
+- **Blockchain**: Solana Network (for oracles and NFTs)
 - **Database**: MongoDB for user data and verification history
 - **Real-time**: Socket.io for live updates
 

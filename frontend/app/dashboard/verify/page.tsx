@@ -215,7 +215,7 @@ const VerifyPage = () => {
   };
 
   const openTransaction = (hash: string) => {
-    window.open(`https://coston2.testnet.flarescan.com/tx/${hash}`, '_blank');
+    window.open(`https://explorer.solana.com/tx/${hash}`, '_blank');
   };
 
   return (

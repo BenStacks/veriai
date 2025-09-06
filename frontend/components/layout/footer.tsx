@@ -12,7 +12,7 @@ export function Footer() {
           <div className="space-y-4">
             <VeriAILogo size="md" />
             <p className="text-sm text-muted-foreground mt-4">
-              On-chain verification for AI-generated content using Flare&apos;s Data Connector.
+              On-chain verification for AI-generated content using Solana&apos;s blockchain infrastructure.
             </p>
           </div>
 
@@ -44,27 +44,27 @@ export function Footer() {
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
                 <a 
-                  href="https://flare.network" 
+                  href="https://solana.com" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="hover:text-foreground transition-colors"
                 >
-                  Flare Network
+                  Solana Network
                 </a>
               </li>
               <li>
                 <a 
-                  href="https://dev.flare.network/fdc" 
+                  href="https://docs.solana.com/developing/on-chain-programs/overview" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="hover:text-foreground transition-colors"
                 >
-                  Data Connector
+                  Solana Programs
                 </a>
               </li>
               <li>
                 <a 
-                  href="https://coston2.testnet.flarescan.com" 
+                  href="https://explorer.solana.com" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="hover:text-foreground transition-colors"
@@ -109,7 +109,7 @@ export function Footer() {
 
         <div className="mt-8 pt-8 border-t flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} VeriAI. Built on Flare Network.
+            © {new Date().getFullYear()} VeriAI. Built on Solana Network.
           </p>
           <div className="flex space-x-6 text-sm text-muted-foreground">
             <Link href="/privacy" className="hover:text-foreground transition-colors">

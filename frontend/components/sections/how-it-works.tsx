@@ -27,10 +27,10 @@ const steps = [
   {
     step: 2,
     title: 'Request Verification',
-    description: 'Submit your content for cryptographic verification on Flare',
+    description: 'Submit your content for cryptographic verification on Solana',
     icon: Shield,
     color: 'from-chart-3 to-chart-3/70',
-    details: ['Submit content & prompt', 'Pay verification fee', 'Flare Data Connector processes']
+    details: ['Submit content & prompt', 'Pay verification fee', 'Solana Oracles process']
   },
   {
     step: 3,
@@ -38,7 +38,7 @@ const steps = [
     description: 'Receive immutable proof stored permanently on-chain',
     icon: Lock,
     color: 'from-chart-5 to-chart-5/70',
-    details: ['Cryptographic hash generated', 'Stored on Flare blockchain', 'Tamper-proof certificate']
+    details: ['Cryptographic hash generated', 'Stored on Solana blockchain', 'Tamper-proof certificate']
   },
   {
     step: 4,
@@ -74,7 +74,7 @@ export function HowItWorksSection() {
             </h2>
             <p className="text-lg text-muted-foreground sm:text-xl max-w-3xl mx-auto">
               Transform your AI content into verifiable, immutable certificates 
-              using Flare's decentralized infrastructure.
+              using Solana's decentralized infrastructure.
             </p>
           </motion.div>
 

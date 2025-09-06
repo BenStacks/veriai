@@ -189,11 +189,10 @@ const verificationRequest = await veriAI.requestVerification({
 
 ### Blockchain Networks
 
-| Network  | Purpose                    | Transaction Fees | Finality    |
-| -------- | -------------------------- | ---------------- | ----------- |
-| Flare    | Primary verification       | ~$0.001          | 3-5 seconds |
-| Solana   | High-throughput operations | ~$0.0001         | 1-2 seconds |
-| Ethereum | Legacy support             | Variable         | 12+ seconds |
+| Network  | Purpose              | Transaction Fees | Finality    |
+| -------- | -------------------- | ---------------- | ----------- |
+| Solana   | Primary verification | ~$0.0001         | 1-2 seconds |
+| Ethereum | Legacy support       | Variable         | 12+ seconds |
 
 ### Performance Metrics
 
@@ -240,7 +239,7 @@ Base Fee: $1.00 USD equivalent in SOL
 
 ### Dynamic Pricing
 
-- **SOL/USD Oracle**: Real-time price feeds from Flare Data Connector
+- **SOL/USD Oracle**: Real-time price feeds from Solana Oracle Network
 - **Fee Adjustment**: Automatic recalculation every 15 minutes
 - **Volume Discounts**: Reduced fees for high-volume users
 - **Enterprise Pricing**: Custom pricing for institutional clients

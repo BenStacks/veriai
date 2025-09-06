@@ -24,7 +24,7 @@ const plans = [
     name: 'Starter',
     description: 'Perfect for individuals and small projects',
     price: '0.01',
-    currency: 'FLR',
+    currency: 'SOL',
     period: 'per verification',
     icon: Zap,
     color: 'from-chart-3 to-chart-3/70',
@@ -41,7 +41,7 @@ const plans = [
     name: 'Professional',
     description: 'For content creators and developers',
     price: '5.0',
-    currency: 'FLR',
+    currency: 'SOL',
     period: 'monthly unlimited',
     icon: Shield,
     color: 'from-primary to-accent',
@@ -214,7 +214,7 @@ export function PricingSection() {
                 </span>
                 <span className="flex items-center">
                   <Zap className="h-4 w-4 mr-1 text-primary" />
-                  Flare Data Connector
+                  Solana Oracles
                 </span>
                 <span className="flex items-center">
                   <Trophy className="h-4 w-4 mr-1 text-chart-4" />
